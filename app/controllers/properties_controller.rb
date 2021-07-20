@@ -9,8 +9,7 @@ class PropertiesController < ApplicationController
   # GET /properties/1 or /properties/1.json
   def show
     @property=Property.find(params[:id])
-    @first_nearest_station=@property.nearest_stations.first
-    @second_nearest_station=@property.nearest_stations.second
+    @nearest_stations=@property.nearest_stations.all
   end
 
   # GET /properties/new
@@ -21,6 +20,8 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1/edit
   def edit
+    @property=Property.find(params[:id])
+    @nearest_station=@property.nearest_stations.new
   end
 
   # POST /properties or /properties.json
@@ -40,6 +41,7 @@ class PropertiesController < ApplicationController
 
   # PATCH/PUT /properties/1 or /properties/1.json
   def update
+    @property=Property.find(params[:id])
     respond_to do |format|
       if @property.update(property_params)
         format.html { redirect_to @property, notice: "Property was successfully updated." }

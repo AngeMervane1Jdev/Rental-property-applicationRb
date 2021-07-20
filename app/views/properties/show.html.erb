@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Property</h1>
 <p>
   <strong>Name:</strong>
   <%= @property.name %>
@@ -27,19 +27,13 @@
 
 
 <hr>
-<% if @first_nearest_station%>
- <h2>Nearest Station 1</h2>
- <p><Strong>Line Name : </Strong><%=@first_nearest_station.line_name%></p>
-<p><Strong>Station Name : </Strong><%=@first_nearest_station.station_name%></p>
-<p><Strong>Number of steps : </Strong><%=@first_nearest_station.number_of_steps%></p>
-<%end%>
-<% if @second_nearest_station %>
- <h2>Nearest Station 2</h2>
- <p><Strong>Line Name : </Strong><%=@second_nearest_station.line_name%></p>
-<p><Strong>Station Name : </Strong><%=@second_nearest_station.station_name%></p>
-<p><Strong>Number of steps : </Strong><%=@second_nearest_station.number_of_steps%></p>
-<%end%>
-  
-
+<%=@nearest_stations.count%>
+<% @nearest_stations.each do |nearest_station|%>
+    <h2>Nearest Station </h2>
+  <p><Strong>Line Name : </Strong><%=nearest_station.line_name%></p>
+  <p><Strong>Station Name : </Strong><%=nearest_station.station_name%></p>
+  <p><Strong>Number of steps : </Strong><%=nearest_station.number_of_steps%></p>
+  <hr>
+  <%end%>
 <%= link_to 'Edit', edit_property_path(@property) %> |
 <%= link_to 'Back', properties_path %>
